@@ -60,7 +60,7 @@ const RegisterComplete = () => {
         autoFocus
       />
       <br />
-      <button type="submit" className="btn btn-raised">
+      <button type="submit" className="btn btn-primary btn-raised">
         Complete Registration
       </button>
     </form>
