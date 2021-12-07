@@ -7,6 +7,7 @@ import Register from "./pages/auth/Register";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
 import RegisterComplete from "./pages/auth/RegisterComplete";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 import NavBar from "./components/nav/NavBar";
 import { ToastContainer } from "react-toastify";
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/register/complete" element={<RegisterComplete />} />
+        <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/store" element={<Store />} />
       </Routes>
     </React.StrictMode>

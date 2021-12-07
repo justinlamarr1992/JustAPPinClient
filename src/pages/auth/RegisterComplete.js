@@ -34,7 +34,7 @@ const RegisterComplete = () => {
         const idTokenResult = await user.getIdTokenResult();
         // Reux store
         // redirect
-        // navigate("/");
+        navigate("/");
         console.log("user", user, "idTokenResult", idTokenResult);
       }
     } catch (error) {

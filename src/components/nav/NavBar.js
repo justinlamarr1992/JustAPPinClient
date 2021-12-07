@@ -23,7 +23,7 @@ const NavBar = () => {
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  let user = useSelector((state) => ({ ...state }));
+  let { user } = useSelector((state) => ({ ...state }));
 
   const handleClick = (e) => {
     // console.log(e.key);
@@ -47,13 +47,13 @@ const NavBar = () => {
         <Link to="/store">Store</Link>
       </Item>
       {!user && (
-        <Item key="register" icon={<UserAddOutlined />}>
+        <Item key="register" className=" float-end" icon={<UserAddOutlined />}>
           <Link to="/register">Register</Link>
         </Item>
       )}
 
       {!user && (
-        <Item key="login" icon={<UserOutlined />}>
+        <Item key="login" icon={<UserOutlined />} className=" float-end">
           <Link to="/login">Login</Link>
         </Item>
       )}
@@ -63,7 +63,7 @@ const NavBar = () => {
           key="sub-menu"
           icon={<SettingOutlined />}
           // title={user.email && user.email.split("@")[0]}
-          title="Not Working right now"
+          title={user.email && user.email.split("@")[0]}
         >
           <Item key="setting:1">Option 1</Item>
           <Item key="setting:2">Option 2</Item>

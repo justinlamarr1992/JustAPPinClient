@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
@@ -13,6 +14,11 @@ const Login = () => {
 
   const navigate = useNavigate();
   let dispatch = useDispatch();
+
+  const { user } = useSelector((state) => ({ ...state }));
+  useEffect(() => {
+    if (user && user.token) navigate("/");
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -114,6 +120,9 @@ const Login = () => {
           >
             Login with Google
           </Button>
+          <Link to="/forgot/password" className=" float-end text-danger">
+            Forgot Password
+          </Link>
         </div>
       </div>
     </div>
