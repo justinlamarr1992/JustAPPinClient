@@ -37,7 +37,7 @@ const App = () => {
   }, []);
   return (
     <React.StrictMode>
-      <NavBar />
+      <NavBar style={{ position: "sticky", zIndex: 1, width: "100%" }} />
       <ToastContainer />
 
       <Routes>

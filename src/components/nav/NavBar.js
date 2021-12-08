@@ -39,7 +39,16 @@ const NavBar = () => {
   };
   return (
     // find out if there is a div here
-    <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+    <Menu
+      onClick={handleClick}
+      selectedKeys={[current]}
+      mode="horizontal"
+      className=""
+      // style={{
+      //   backgroundColor: "00a3df",
+      //   color: "#00a3df",
+      // }}
+    >
       <Item key="home" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
       </Item>

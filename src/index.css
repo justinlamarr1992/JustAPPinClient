@@ -289,6 +289,21 @@ body {
     font-size: 20px;
     font-weight: bold;
   }
+  .ant-menu {
+    background: var(--sec-t) !important;
+  }
+  .ant-menu-title-content {
+    color: var(--pri-t) !important;
+  }
+  .ant-menu-title-content a {
+    color: var(--pri-t) !important;
+  }
+  .ant-menu-item-icon {
+    color: var(--pri-c) !important;
+  }
+  .ant-menu-item-selected {
+    color: white !important;
+  }
 
   .navBar a:hover {
     color: var(--sec-c);
