@@ -8,12 +8,14 @@ import Home from "./pages/Home";
 import Store from "./pages/Store";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
+import History from "./pages/user/History";
 
 import NavBar from "./components/nav/NavBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { auth } from "./firebase";
+import { currentUser } from "./functions/auth";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,13 +25,20 @@ const App = () => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult();
         console.log("user", user);
-        dispatch({
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-        });
+        currentUser(idTokenResult.token)
+          .then((res) =>
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: res.data.name,
+                email: res.data.email,
+                token: idTokenResult.token,
+                role: res.data.role,
+                _id: res.data._id,
+              },
+            })
+          )
+          .catch((err) => console.log(err));
       }
     });
     //clean up
@@ -47,6 +56,7 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/store" element={<Store />} />
+        <Route path="/user/history" element={<History />} />
       </Routes>
     </React.StrictMode>
   );

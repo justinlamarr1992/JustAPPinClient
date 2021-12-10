@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { createOrUpdateUser } from "../../functions/auth";
 
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
@@ -7,6 +9,9 @@ import { toast } from "react-toastify";
 const RegisterComplete = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { user } = useSelector((state) => ({ ...state }));
+  let dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -32,10 +37,25 @@ const RegisterComplete = () => {
         let user = auth.currentUser;
         await user.updatePassword(password);
         const idTokenResult = await user.getIdTokenResult();
+
+        console.log("user", user, "idTokenResult", idTokenResult);
+        createOrUpdateUser(idTokenResult.token)
+          .then((res) =>
+            dispatch({
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: res.data.name,
+                email: res.data.email,
+                token: idTokenResult.token,
+                role: res.data.role,
+                _id: res.data._id,
+              },
+            })
+          )
+          .catch((err) => console.log(err));
         // Reux store
         // redirect
         navigate("/");
-        console.log("user", user, "idTokenResult", idTokenResult);
       }
     } catch (error) {
       console.log(error);
