@@ -3,7 +3,7 @@ const CTA = () => {
     <div id="cta">
       <h5 class="call-title">Contact</h5>
       <h4 class="call-text">Get in Touch</h4>
-      <form action="/insert_data" method="post">
+      <form action="/insert_data" method="post" class="forms">
         <input
           class="form-input1"
           type="text"

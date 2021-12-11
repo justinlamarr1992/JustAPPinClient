@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -9,6 +9,7 @@ import Store from "./pages/Store";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import History from "./pages/user/History";
+import UserRoutes from "./components/routes/UserRoutes";
 
 import NavBar from "./components/nav/NavBar";
 import { ToastContainer } from "react-toastify";
@@ -44,8 +45,31 @@ const App = () => {
     //clean up
     return () => unsubscribe();
   }, []);
+  // return (
+  //   <React.StrictMode>
+  //     <NavBar style={{ position: "sticky", zIndex: 1, width: "100%" }} />
+  //     <ToastContainer />
+
+  //     <Routes>
+  //       <Route path="/" element={<Home />} />
+  //       <Route path="/login" element={<Login />} />
+  //       <Route path="/register" element={<Register />} />
+  //       <Route path="/register/complete" element={<RegisterComplete />} />
+  //       <Route path="/forgot/password" element={<ForgotPassword />} />
+  //       <Route path="/store" element={<Store />} />
+  //       <Route
+  //         path="/user/history"
+  //         element={
+  //           <UserRoutes>
+  //             <History />
+  //           </UserRoutes>
+  //         }
+  //       />
+  //     </Routes>
+  //   </React.StrictMode>
+  // );
   return (
-    <React.StrictMode>
+    <BrowserRouter>
       <NavBar style={{ position: "sticky", zIndex: 1, width: "100%" }} />
       <ToastContainer />
 
@@ -56,9 +80,16 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/store" element={<Store />} />
-        <Route path="/user/history" element={<History />} />
+        <Route
+          path="/user/history"
+          element={
+            <UserRoutes>
+              <History />
+            </UserRoutes>
+          }
+        />
       </Routes>
-    </React.StrictMode>
+    </BrowserRouter>
   );
 };
 

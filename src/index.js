@@ -16,14 +16,22 @@ import reportWebVitals from "./reportWebVitals";
 
 const store = createStore(rootReducer, composeWithDevTools());
 
+// ReactDOM.render(
+//   // <React.StrictMode>
+//   <Provider store={store}>
+//     <BrowserRouter>
+//       <App />
+//     </BrowserRouter>
+//   </Provider>,
+//   // </React.StrictMode>
+//   document.getElementById("root")
+// );
 ReactDOM.render(
-  // <React.StrictMode>
-  <Provider store={store}>
-    <BrowserRouter>
+  <React.StrictMode>
+    <Provider store={store}>
       <App />
-    </BrowserRouter>
-  </Provider>,
-  // </React.StrictMode>
+    </Provider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

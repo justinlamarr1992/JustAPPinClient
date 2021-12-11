@@ -636,7 +636,7 @@ body {
     justify-self: center;
     color: var(--sec-t);
   }
-  form {
+  .forms {
     grid-column: 2/5;
     grid-row: 3/4;
     display: grid;
@@ -645,7 +645,7 @@ body {
     grid-template-rows: repeat(3, 1fr);
     row-gap: 25px;
   }
-  form input {
+  .forms input {
     border-radius: var(--brad);
     border: none;
     padding-left: 20px;
@@ -1181,7 +1181,9 @@ body {
     grid-column: 2/3;
     grid-row: 2/3;
   }
-  form {
+
+  /* here fix this for the width */
+  .forms {
     grid-column: 2/3;
     grid-row: 3/4;
     grid-template-columns: 1fr;
