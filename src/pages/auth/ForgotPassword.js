@@ -12,7 +12,7 @@ const ForgotPassword = () => {
   const { user } = useSelector((state) => ({ ...state }));
   useEffect(() => {
     if (user && user.token) navigate("/");
-  }, [user]);
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

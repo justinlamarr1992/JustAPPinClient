@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { createOrUpdateUser } from "../../functions/auth";
 
@@ -66,7 +66,7 @@ const RegisterComplete = () => {
     setEmail(window.localStorage.getItem("emailForRegistration"));
     console.log(window.location.href);
     console.log(window.localStorage.getItem("emailForRegistration"));
-  }, []);
+  }, [navigate]);
   const completeRegisterForm = () => (
     <form onSubmit={handleSubmit}>
       <input type="email" className="form-control" value={email} disabled />

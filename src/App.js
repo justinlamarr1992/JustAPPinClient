@@ -9,7 +9,12 @@ import Store from "./pages/Store";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import History from "./pages/user/History";
-import UserRoutes from "./components/routes/UserRoutes";
+import Password from "./pages/user/Password";
+import Wishlist from "./pages/user/Wishlist";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
+import AdminRoute from "./components/routes/AdminRoute";
+import UserRoute from "./components/routes/UserRoute";
 
 import NavBar from "./components/nav/NavBar";
 import { ToastContainer } from "react-toastify";
@@ -44,30 +49,8 @@ const App = () => {
     });
     //clean up
     return () => unsubscribe();
-  }, []);
-  // return (
-  //   <React.StrictMode>
-  //     <NavBar style={{ position: "sticky", zIndex: 1, width: "100%" }} />
-  //     <ToastContainer />
+  }, [dispatch]);
 
-  //     <Routes>
-  //       <Route path="/" element={<Home />} />
-  //       <Route path="/login" element={<Login />} />
-  //       <Route path="/register" element={<Register />} />
-  //       <Route path="/register/complete" element={<RegisterComplete />} />
-  //       <Route path="/forgot/password" element={<ForgotPassword />} />
-  //       <Route path="/store" element={<Store />} />
-  //       <Route
-  //         path="/user/history"
-  //         element={
-  //           <UserRoutes>
-  //             <History />
-  //           </UserRoutes>
-  //         }
-  //       />
-  //     </Routes>
-  //   </React.StrictMode>
-  // );
   return (
     <BrowserRouter>
       <NavBar style={{ position: "sticky", zIndex: 1, width: "100%" }} />
@@ -80,12 +63,43 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/store" element={<Store />} />
+
+        {/* temp for design */}
+        {/* <Route path="/user/history" element={<History />} />
+        <Route path="/user/password" element={<Password />} />
+        <Route path="/user/wishlist" element={<Wishlist />} /> */}
+        {/* same */}
+        {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
         <Route
           path="/user/history"
           element={
-            <UserRoutes>
+            <UserRoute>
               <History />
-            </UserRoutes>
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/user/password"
+          element={
+            <UserRoute>
+              <Password />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/user/wishlist"
+          element={
+            <UserRoute>
+              <Wishlist />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
           }
         />
       </Routes>

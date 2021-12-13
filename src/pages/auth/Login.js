@@ -20,14 +20,14 @@ const Login = () => {
     if (res.data.role === "admin") {
       navigate("/admin/dashboard");
     } else {
-      navigate("user/history");
+      navigate("/user/history");
     }
   };
 
   const { user } = useSelector((state) => ({ ...state }));
   useEffect(() => {
     if (user && user.token) navigate("/");
-  }, [user]);
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
