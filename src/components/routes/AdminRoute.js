@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import { Navigate } from "react-router";
@@ -53,7 +53,6 @@ import { currentAdmin } from "../../functions/auth";
 
 // third
 
-const authContext = createContext();
 const AdminRoute = ({ children, ...rest }) => {
   const [ok, setOk] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
@@ -66,19 +65,20 @@ const AdminRoute = ({ children, ...rest }) => {
           setOk(true);
         })
         .catch((err) => {
-          console.log("ADMIN ROUTE ERROR", err);
+          console.log("ADMIN ROUTE ERR", err);
           setOk(false);
         });
     }
+    ok ? (
+      <Routes>
+        <Route {...rest} />
+      </Routes>
+    ) : (
+      <LoadingToRedirect />
+    );
   }, [user]);
 
-  return ok ? (
-    <Routes>
-      <Route {...rest} />
-    </Routes>
-  ) : (
-    <LoadingToRedirect />
-  );
+  return children;
 };
 
 export default AdminRoute;

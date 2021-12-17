@@ -20,6 +20,10 @@ import LoadingToRedirect from "./LoadingToRedirect";
 
 const UserRoute = ({ children }) => {
   const { user } = useSelector((state) => ({ ...state }));
+  if (!user && user.token) {
+    return <Navigate to="/login" />;
+  }
+  return children;
 };
 
 export default UserRoute;
