@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { updateCategory, getCategory } from "../../../functions/category";
 
 import AdminNav from "../../../components/nav/AdminNav";
+import CategoryForm from "../../../components/forms/CategoryForm";
 
 const CategoryUpdate = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -39,24 +40,6 @@ const CategoryUpdate = () => {
       });
   };
 
-  const categoryForm = () => (
-    <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          className="form-control"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          autoFocus
-          required
-        />
-        <br />
-        <button className="btn btn-outline-primary">Save</button>
-      </div>
-    </form>
-  );
-
   return (
     <div className="container-fluid">
       <div className="row">
@@ -69,7 +52,11 @@ const CategoryUpdate = () => {
           ) : (
             <h4>Update Category</h4>
           )}
-          {categoryForm()}
+          <CategoryForm
+            handleSubmit={handleSubmit}
+            name={name}
+            setName={setName}
+          />
           <br />
         </div>
       </div>
