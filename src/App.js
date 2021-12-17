@@ -12,7 +12,10 @@ import History from "./pages/user/History";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+
+// Product Management
 import CategoryCreate from "./pages/admin/category/CategoryCreate";
+import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
@@ -106,6 +109,15 @@ const App = () => {
             </AdminRoute>
           }
         />
+        <Route
+          path="/admin/category/:slug"
+          element={
+            <AdminRoute>
+              <CategoryUpdate />
+            </AdminRoute>
+          }
+        />
+
         {/* temp for design */}
         {/* <Route path="/user/history" element={<History />} />
         <Route path="/user/password" element={<Password />} />
