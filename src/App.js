@@ -12,6 +12,7 @@ import History from "./pages/user/History";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import CategoryCreate from "./pages/admin/category/CategoryCreate";
 
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
@@ -63,13 +64,7 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/store" element={<Store />} />
-
-        {/* temp for design */}
-        {/* <Route path="/user/history" element={<History />} />
-        <Route path="/user/password" element={<Password />} />
-        <Route path="/user/wishlist" element={<Wishlist />} /> */}
-        {/* same */}
-        {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
+        {/* User Routes */}
         <Route
           path="/user/history"
           element={
@@ -94,6 +89,7 @@ const App = () => {
             </UserRoute>
           }
         />
+        {/* Admin Routes */}
         <Route
           path="/admin/dashboard"
           element={
@@ -102,6 +98,21 @@ const App = () => {
             </AdminRoute>
           }
         />
+        <Route
+          path="/admin/category"
+          element={
+            <AdminRoute>
+              <CategoryCreate />
+            </AdminRoute>
+          }
+        />
+        {/* temp for design */}
+        {/* <Route path="/user/history" element={<History />} />
+        <Route path="/user/password" element={<Password />} />
+        <Route path="/user/wishlist" element={<Wishlist />} /> */}
+        {/* same */}
+        {/* <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/category" element={<CategoryCreate />} /> */}
       </Routes>
     </BrowserRouter>
   );
