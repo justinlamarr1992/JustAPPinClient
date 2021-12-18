@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CategoryForm from "../../../components/forms/CategoryForm";
+import LocalSearch from "../../../components/forms/LocalSearch";
 import {
   createCategory,
   getCategories,
@@ -65,10 +66,6 @@ const CategoryCreate = () => {
     }
   };
 
-  const handleSearchChange = (e) => {
-    e.preventDefault();
-    setKeyword(e.target.value.toLowerCase());
-  };
   const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
@@ -88,13 +85,7 @@ const CategoryCreate = () => {
             name={name}
             setName={setName}
           />
-          <input
-            type="search"
-            placeholder="filter"
-            value={keyword}
-            onChange={handleSearchChange}
-            className="form-control mb-4"
-          />
+          <LocalSearch keyword={keyword} setKeyword={setKeyword} />
           <br />
           {categories.filter(searched(keyword)).map((c) => (
             <div className="alert" key={c._id}>
