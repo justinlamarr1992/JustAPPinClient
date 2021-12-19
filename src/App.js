@@ -16,6 +16,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 // Product Management
 import CategoryCreate from "./pages/admin/category/CategoryCreate";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
+import SubCreate from "./pages/admin/sub/SubCreate";
 
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
@@ -114,6 +115,14 @@ const App = () => {
           element={
             <AdminRoute>
               <CategoryUpdate />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/sub"
+          element={
+            <AdminRoute>
+              <SubCreate />
             </AdminRoute>
           }
         />
