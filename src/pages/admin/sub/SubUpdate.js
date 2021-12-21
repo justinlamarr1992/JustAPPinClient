@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 import CategoryForm from "../../../components/forms/CategoryForm";
 import LocalSearch from "../../../components/forms/LocalSearch";
 import { getCategories } from "../../../functions/category";
@@ -10,38 +12,45 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import AdminNav from "../../../components/nav/AdminNav";
 
-const SubCreate = () => {
+const SubUpdate = () => {
   const { user } = useSelector((state) => ({ ...state }));
+
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState("");
-  const [subs, setSubs] = useState([]);
+  const [parent, setParent] = useState("");
+
+  const navigate = useNavigate();
+  const { slug } = useParams();
 
   //   step 1
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     loadCategories();
-    loadSubs();
+    loadSub();
   }, []);
 
   const loadCategories = () =>
     getCategories().then((c) => setCategories(c.data));
 
-  const loadSubs = () => getSubs().then((s) => setSubs(s.data));
+  const loadSub = () =>
+    getSub(slug).then((s) => {
+      setName(s.data.name);
+      setParent(s.data.parent);
+    });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(name);
     setLoading(true);
-    createSub({ name, parent: category }, user.token)
+    updateSub({ name, parent }, user.token)
       .then((res) => {
         // console.log(res);
         setLoading(false);
         setName("");
         toast.success(`"${res.data.name}" is created`);
-        loadSubs();
+        navigate("/admin/sub");
       })
       .catch((err) => {
         console.log(err);
@@ -134,4 +143,4 @@ const SubCreate = () => {
     </div>
   );
 };
-export default SubCreate;
+export default SubUpdate;
