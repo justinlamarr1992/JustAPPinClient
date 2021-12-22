@@ -1,11 +1,10 @@
+import React from "react";
+import Multi from "../../images/MultiScreenLogo.png";
+
 const About = () => {
   return (
     <div id="about">
-      <img
-        class="about-image"
-        src="./images/MultiScreenLogo.png"
-        alt="Multiple Screens with Logo"
-      />
+      <img class="about-image" src={Multi} alt="Multiple Screens with Logo" />
       <h2 class="about-title">About Us</h2>
 
       <p class="about-text text-gray">

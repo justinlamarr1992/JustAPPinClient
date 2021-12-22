@@ -1,8 +1,10 @@
+import React from "react";
+import Bene from "../../images/benefitsPic.jpg";
 const Benefit = () => {
   return (
     <div class="benefit">
       {/* TODO Picture of happy business internet user */}
-      <img class="bene-pic" src="./images/benefitsPic.jpg" alt="" />
+      <img class="bene-pic" src={Bene} alt="" />
       <div class="bene-container">
         <h2 class="bene-container-title">Website Benefits</h2>
         <div class="bene item1">

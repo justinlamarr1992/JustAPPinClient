@@ -33,11 +33,7 @@ const Hero = () => {
           </a>
         </div>
       </div>
-      <img
-        class="hero-logo"
-        src="../../images/Logo.png"
-        alt="JustAPPin’ Logo"
-      />
+      <img class="hero-logo" src={Logo} alt="JustAPPin’ Logo" />
       {/* <Logo /> */}
       <i class="fas fa-2x fa-arrow-down"></i>
     </div>

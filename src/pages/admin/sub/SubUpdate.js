@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CategoryForm from "../../../components/forms/CategoryForm";
 import LocalSearch from "../../../components/forms/LocalSearch";
 import { getCategories } from "../../../functions/category";
-import { createSub, getSub, getSubs, removeSub } from "../../../functions/sub";
+import { getSub, updateSub } from "../../../functions/sub";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import AdminNav from "../../../components/nav/AdminNav";
@@ -44,12 +44,12 @@ const SubUpdate = () => {
     e.preventDefault();
     // console.log(name);
     setLoading(true);
-    updateSub({ name, parent }, user.token)
+    updateSub(slug, { name, parent }, user.token)
       .then((res) => {
         // console.log(res);
         setLoading(false);
         setName("");
-        toast.success(`"${res.data.name}" is created`);
+        toast.success(`"${res.data.name}" is Updated`);
         navigate("/admin/sub");
       })
       .catch((err) => {
@@ -57,26 +57,6 @@ const SubUpdate = () => {
         setLoading(false);
         if (err.response.status === 400) toast.error(err.response.data);
       });
-  };
-
-  const handleRemove = async (slug) => {
-    // let answer = window.confirm("Delete?");
-    // console.log(answer, slug);
-    if (window.confirm("Delete?")) {
-      setLoading(true);
-      removeSub(slug, user.token)
-        .then((res) => {
-          setLoading(false);
-          toast.error(`${res.data.name} deleted`);
-          loadSubs();
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            setLoading(false);
-            toast.err(err.response.data);
-          }
-        });
-    }
   };
 
   //   step 4
@@ -100,12 +80,12 @@ const SubUpdate = () => {
             <select
               name="category"
               className="form-control"
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) => setParent}
             >
               <option>Please Select Category</option>
               {categories.length > 0 &&
                 categories.map((c) => (
-                  <option value={c._id} key={c._id}>
+                  <option selected={c._id === parent} value={c._id} key={c._id}>
                     {c.name}
                   </option>
                 ))}
@@ -117,27 +97,6 @@ const SubUpdate = () => {
             name={name}
             setName={setName}
           />
-
-          {/* step 2 and 3 */}
-          <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-
-          <br />
-          {subs.filter(searched(keyword)).map((s) => (
-            <div className="alert" key={s._id}>
-              {s.name}
-              <span
-                className="btn btn-sm float-end"
-                onClick={() => handleRemove(s.slug)}
-              >
-                <DeleteOutlined className="text-danger" />
-              </span>
-              <Link to={`/admin/sub/${s.slug}`}>
-                <span className="btn btn-sm float-end">
-                  <EditOutlined className="text-warning" />
-                </span>
-              </Link>
-            </div>
-          ))}
         </div>
       </div>
     </div>

@@ -1,8 +1,10 @@
+import React from "react";
+import Logo from "../../images/AltLogo.png";
 const Footer = () => {
   return (
     <footer>
       <div class="foot1">
-        <img class="footer-logo" src="./images/AltLogo.png" alt="" />
+        <img class="footer-logo" src={Logo} alt="" />
         <a class="footer-link" href="#about">
           About Us
         </a>

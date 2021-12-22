@@ -1,3 +1,8 @@
+import React from "react";
+import Client1 from "../../images/iWax.png";
+import ClientYou from "../../images/yourcompany.png";
+import ClientWeb from "../../images/iWaxWeb.png";
+
 const Testimony = () => {
   return (
     <div class="testimony">
@@ -9,7 +14,7 @@ const Testimony = () => {
 
       <div class="test-clients">
         <div class="client c-top">
-          <img src="./images/iWax.png" class="client-pic" alt="" />
+          <img src={Client1} class="client-pic" alt="" />
           <h5 class="client-text">
             "Since my Website went live I have been able to manage current
             clients and connect with new ones. I could not have before. It's so
@@ -29,14 +34,14 @@ const Testimony = () => {
           </h6>
         </div>
         <div class="client c-bottom">
-          <img src="./images/yourcompany.png" class="client-pic" alt="" />
+          <img src={ClientYou} class="client-pic" alt="" />
           <h5 class="client-text">"This could be your comment here!"</h5>
           <h4 class="client-name">Your Name</h4>
           <h6 class="client-company">Your Company Name</h6>
         </div>
       </div>
       {/* TODO upload picture of websites made */}
-      <img src="./images/iWaxWeb.png" class="client-web" alt="" />
+      <img src={ClientWeb} class="client-web" alt="" />
     </div>
   );
 };

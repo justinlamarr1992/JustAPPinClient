@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { Menu } from "antd";
+import { Menu, Image, Layout } from "antd";
 import { Link } from "react-router-dom";
+import Logo from "../../images/Logo.png";
 
 // ERROR MAY COME FROM HERE
 import firebase from "firebase/compat";
@@ -18,6 +19,8 @@ import {
 } from "@ant-design/icons";
 
 const { SubMenu, Item } = Menu;
+const { Header, Content, Footer } = Layout;
+
 const NavBar = () => {
   const [current, setCurrent] = useState("home");
 
@@ -39,75 +42,80 @@ const NavBar = () => {
   };
   return (
     // find out if there is a div here
-    <Menu
-      onClick={handleClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      className=""
-      // style={{
-      //   backgroundColor: "00a3df",
-      //   color: "#00a3df",
-      // }}
-    >
-      <Item key="home" icon={<HomeOutlined />}>
-        <Link to="/">Home</Link>
-      </Item>
-      <Item key="store" icon={<ShoppingCartOutlined />}>
-        <Link to="/store">Store</Link>
-      </Item>
-      {!user && (
-        <Item key="register" className=" float-end" icon={<UserAddOutlined />}>
-          <Link to="/register">Register</Link>
-        </Item>
-      )}
-
-      {!user && (
-        <Item key="login" icon={<UserOutlined />} className=" float-end">
-          <Link to="/login">Login</Link>
-        </Item>
-      )}
-
-      {user && (
-        <SubMenu
-          key="sub-menu"
-          icon={<SettingOutlined />}
-          // title={user.email && user.email.split("@")[0]}
-          title={user.email && user.email.split("@")[0]}
+    <Layout>
+      <Header
+        style={{
+          position: "fixed",
+          zIndex: 1,
+          width: "100%",
+          background: "#fff",
+        }}
+      >
+        <Menu
+          onClick={handleClick}
+          selectedKeys={[current]}
+          mode="horizontal"
+          className=""
+          // style={{
+          //   backgroundColor: "00a3df",
+          //   color: "#00a3df",
+          // }}
         >
-          {user && user.role === "lead" && (
-            <Item>
-              <Link to="/user/history">Dashboard</Link>
-            </Item>
-          )}
-          {user && user.role === "admin" && (
-            <Item>
-              <Link to="/admin/dashboard">Dashboard</Link>
-            </Item>
-          )}
-          <Item icon={<LogoutOutlined />} onClick={logout}>
-            Logout
+          <Item>
+            <Image
+              className="float-start"
+              preview={false}
+              width={100}
+              src={Logo}
+            />
           </Item>
-        </SubMenu>
-      )}
-    </Menu>
+          <Item key="home" icon={<HomeOutlined />}>
+            <Link to="/">Home</Link>
+          </Item>
+          <Item key="store" icon={<ShoppingCartOutlined />}>
+            <Link to="/store">Store</Link>
+          </Item>
+          {!user && (
+            <Item
+              key="register"
+              className=" float-end"
+              icon={<UserAddOutlined />}
+            >
+              <Link to="/register">Register</Link>
+            </Item>
+          )}
 
-    // <div className="nav d-flex justify-content-between">
-    //   <Link className="nav-link" to="/">
-    //     Home
-    //   </Link>
-    //   <Link className="nav-link" to="/store">
-    //     Store
-    //   </Link>
+          {!user && (
+            <Item key="login" icon={<UserOutlined />} className=" float-end">
+              <Link to="/login">Login</Link>
+            </Item>
+          )}
 
-    /* Setup to have these only if the user is not signed in */
-
-    //   <Link className="nav-link" to="/login">
-    //     Login
-    //   </Link>
-    //   <Link className="nav-link" to="/register">
-    //     Register
-    //   </Link>
-    // </div>
+          {user && (
+            <SubMenu
+              key="sub-menu"
+              icon={<SettingOutlined />}
+              // title={user.email && user.email.split("@")[0]}
+              title={user.email && user.email.split("@")[0]}
+            >
+              {user && user.role === "lead" && (
+                <Item>
+                  <Link to="/user/history">Dashboard</Link>
+                </Item>
+              )}
+              {user && user.role === "admin" && (
+                <Item>
+                  <Link to="/admin/dashboard">Dashboard</Link>
+                </Item>
+              )}
+              <Item icon={<LogoutOutlined />} onClick={logout}>
+                Logout
+              </Item>
+            </SubMenu>
+          )}
+        </Menu>
+      </Header>
+    </Layout>
   );
 };
 
