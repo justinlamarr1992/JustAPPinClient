@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-// import { createProduct } from "../../../functions/product";
 import AdminNav from "../../../components/nav/AdminNav";
 import { createProduct } from "../../../functions/product";
 import ProductCreateForm from "../../../components/forms/ProductCreateForm";
 import { getCategories, getCategorySubs } from "../../../functions/category";
+import FileUpload from "../../../components/forms/FileUpload";
+import { LoadingOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 const initialState = {
   title: "",
@@ -37,10 +39,7 @@ const ProductCreate = () => {
   const [values, setValues] = useState(initialState);
   const [subOptions, setSubOptions] = useState([]);
   const [showSub, setShowSub] = useState(false);
-  // test mix appointment and ecomm
-  const [preview, setPreview] = useState(
-    "https:///via.placeholder.com/100x100.png?text=PREVIEW"
-  );
+  const [loading, setLoading] = useState(false);
 
   const { user } = useSelector((state) => ({ ...state }));
 
@@ -59,21 +58,13 @@ const ProductCreate = () => {
         window.alert(
           `${res.data.color} "${res.data.title}" is now available for customers to purchase`
         );
-        // window.location.reload();
-        console.log(res.data.images);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
         // if (err.response.status === 400) toast.error(err.response.data);
         toast.error(err.response.data.err);
       });
-  };
-
-  // testing images
-  const handleImageChange = (e) => {
-    console.log(e.target.files[0]);
-    setValues({ ...values, images: e.target.files[0] });
-    setPreview(e.target.files[0]);
   };
 
   const handleChange = (e) => {
@@ -91,6 +82,24 @@ const ProductCreate = () => {
     setShowSub(true);
   };
 
+  const handleImageRemove = (public_id) => {
+    setLoading(true);
+    console.log("remove image", public_id);
+    axios
+      .post(
+        `${process.env.REACT_APP_API}/removeimage`,
+        { public_id },
+        { headers: { authtoken: user ? user.token : "" } }
+      )
+      .then((res) => {
+        setLoading(false);
+        const { images } = values;
+        let filteredImages = images.filter((item) => {
+          return item.public_id !== public_id;
+        });
+      });
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -98,21 +107,29 @@ const ProductCreate = () => {
           <AdminNav />
         </div>
         <div className="col-md-10">
-          <h4>Product Create</h4>
-          <pre>{JSON.stringify(values, null, 4)}</pre>
+          {loading ? (
+            <LoadingOutlined className="text-danger" />
+          ) : (
+            <h4>Product Create</h4>
+          )}
+          <pre>{JSON.stringify(values.images)}</pre>
 
           <hr />
+          <div className="p-3">
+            <FileUpload
+              values={values}
+              setValues={setValues}
+              setLoading={setLoading}
+            />
+          </div>
           <ProductCreateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
             values={values}
+            setValues={setValues}
             handleCategoryChange={handleCategoryChange}
-            handleImageChange={handleImageChange}
             subOptions={subOptions}
             showSub={showSub}
-            setValues={setValues}
-            preview={preview}
-            setPreview={setPreview}
           />
         </div>
       </div>
