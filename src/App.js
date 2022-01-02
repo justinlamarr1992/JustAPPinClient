@@ -14,11 +14,13 @@ import Wishlist from "./pages/user/Wishlist";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 
 // Product Management
+import AllProducts from "./pages/admin/product/AllProducts";
 import CategoryCreate from "./pages/admin/category/CategoryCreate";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 import SubCreate from "./pages/admin/sub/SubCreate";
 import SubUpdate from "./pages/admin/sub/SubUpdate";
 import ProductCreate from "./pages/admin/product/ProductCreate";
+import ProductUpdate from "./pages/admin/product/ProductUpdate";
 
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
@@ -105,6 +107,14 @@ const App = () => {
           }
         />
         <Route
+          path="/admin/products"
+          element={
+            <AdminRoute>
+              <AllProducts />
+            </AdminRoute>
+          }
+        />
+        <Route
           path="/admin/category"
           element={
             <AdminRoute>
@@ -141,6 +151,14 @@ const App = () => {
           element={
             <AdminRoute>
               <ProductCreate />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/product/:slug"
+          element={
+            <AdminRoute>
+              <ProductUpdate />
             </AdminRoute>
           }
         />

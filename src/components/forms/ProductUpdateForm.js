@@ -3,18 +3,18 @@ import React, { useState } from "react";
 import { Select } from "antd";
 
 const { Option } = Select;
-const ProductCreateForm = ({
+const ProductUpdateForm = ({
   handleSubmit,
   handleChange,
   values,
-  handleCategoryChange,
-  subOptions,
-  showSub,
+  //   handleCategoryChange,
+  //   subOptions,
+  //   showSub,
   setValues,
 }) => {
   const {
     title,
-    desciption,
+    description,
     price,
     category,
     subs,
@@ -45,7 +45,7 @@ const ProductCreateForm = ({
         <input
           type="text"
           name="description"
-          value={desciption}
+          value={description}
           onChange={handleChange}
           className="form-control"
         />
@@ -115,7 +115,7 @@ const ProductCreateForm = ({
           ))}
         </select>
       </div>
-      <div className="form-group">
+      {/* <div className="form-group">
         <label>Category</label>
         <select
           name="category"
@@ -130,10 +130,10 @@ const ProductCreateForm = ({
               </option>
             ))}
         </select>
-      </div>
-      {subOptions ? subOptions.length : "no subs yet"}
+      </div> */}
+      {/* {subOptions ? subOptions.length : "no subs yet"} */}
 
-      {showSub && (
+      {/* {showSub && (
         <div>
           <label> SubCategory</label>
           <Select
@@ -151,10 +151,10 @@ const ProductCreateForm = ({
               ))}
           </Select>
         </div>
-      )}
+      )} */}
 
       <button className="btn btn-outline-info">Save</button>
     </form>
   );
 };
-export default ProductCreateForm;
+export default ProductUpdateForm;
