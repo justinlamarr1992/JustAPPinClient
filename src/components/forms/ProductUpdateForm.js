@@ -7,11 +7,15 @@ const ProductUpdateForm = ({
   handleSubmit,
   handleChange,
   values,
-  //   handleCategoryChange,
-  //   subOptions,
-  //   showSub,
   setValues,
+  handleCategoryChange,
+  categories,
+  subOptions,
+  arrayOfSubs,
+  setArrayOfSubs,
+  selectedCategory,
 }) => {
+  // destructure
   const {
     title,
     description,
@@ -25,7 +29,6 @@ const ProductUpdateForm = ({
     articles,
     color,
     article,
-    categories,
   } = values;
 
   return (
@@ -67,8 +70,8 @@ const ProductUpdateForm = ({
           id=""
           className="form-control"
           onChange={handleChange}
+          value={shipping === "Yes" ? "Yes" : "No"}
         >
-          <option>Please Select</option>
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>
@@ -86,12 +89,11 @@ const ProductUpdateForm = ({
       <div className="form-group">
         <label>Color</label>
         <select
+          value={color}
           name="color"
-          id=""
           className="form-control"
           onChange={handleChange}
         >
-          <option>Please Select</option>
           {colors.map((c) => (
             <option key={c} value={c}>
               {c}
@@ -99,6 +101,7 @@ const ProductUpdateForm = ({
           ))}
         </select>
       </div>
+
       <div className="form-group">
         <label>Article of Clothing</label>
         <select
@@ -106,6 +109,7 @@ const ProductUpdateForm = ({
           id=""
           className="form-control"
           onChange={handleChange}
+          value={article}
         >
           <option>Please Select</option>
           {articles.map((a) => (
@@ -115,14 +119,14 @@ const ProductUpdateForm = ({
           ))}
         </select>
       </div>
-      {/* <div className="form-group">
+      <div className="form-group">
         <label>Category</label>
         <select
           name="category"
           className="form-control"
           onChange={handleCategoryChange}
+          value={selectedCategory ? selectedCategory : category._id}
         >
-          <option>Please Select Category</option>
           {categories.length > 0 &&
             categories.map((c) => (
               <option value={c._id} key={c._id}>
@@ -130,28 +134,24 @@ const ProductUpdateForm = ({
               </option>
             ))}
         </select>
-      </div> */}
-      {/* {subOptions ? subOptions.length : "no subs yet"} */}
-
-      {/* {showSub && (
-        <div>
-          <label> SubCategory</label>
-          <Select
-            mode="multiple"
-            style={{ width: "100%" }}
-            placeholder="Please Select"
-            value={subs}
-            onChange={(value) => setValues({ ...values, subs: value })}
-          >
-            {subOptions.length &&
-              subOptions.map((s) => (
-                <Option key={s._id} value={s._id}>
-                  {s.name}
-                </Option>
-              ))}
-          </Select>
-        </div>
-      )} */}
+      </div>
+      <div>
+        <label> SubCategory</label>
+        <Select
+          mode="multiple"
+          style={{ width: "100%" }}
+          placeholder="Please Select"
+          value={arrayOfSubs}
+          onChange={(value) => setArrayOfSubs(value)}
+        >
+          {subOptions.length &&
+            subOptions.map((s) => (
+              <Option key={s._id} value={s._id}>
+                {s.name}
+              </Option>
+            ))}
+        </Select>
+      </div>
 
       <button className="btn btn-outline-info">Save</button>
     </form>

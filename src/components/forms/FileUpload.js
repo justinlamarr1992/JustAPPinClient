@@ -73,7 +73,7 @@ const FileUpload = ({ values, setValues, setLoading }) => {
 
   return (
     <>
-      <div className="row">
+      <div className="row mt-3">
         {values.images &&
           values.images.map((image) => (
             <Badge
