@@ -7,7 +7,7 @@ import { getProduct, updateProduct } from "../../../functions/product";
 import ProductUpdateForm from "../../../components/forms/ProductUpdateForm";
 import { getCategories, getCategorySubs } from "../../../functions/category";
 import FileUpload from "../../../components/forms/FileUpload";
-import { AreaChartOutlined, LoadingOutlined } from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 import axios from "axios";
 
 const initialState = {
