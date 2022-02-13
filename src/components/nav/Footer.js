@@ -40,12 +40,12 @@ const Footer = () => {
       <div class="foot4">
         <h4 class="f4-title">Instagram</h4>
         <p class="f4-pic1">Social Media Post Coming Soon</p>
-        <p class="f4-pic1">pic</p>
-        {/* <p class="f4-pic2">pic</p>
-            <p class="f4-pic3">pic</p>
-            <p class="f4-pic4">pic</p>
-            <p class="f4-pic5">pic</p>
-            <p class="f4-pic6">pic</p> */}
+        {/* <p class="f4-pic1">pic</p>
+        <p class="f4-pic2">pic</p>
+        <p class="f4-pic3">pic</p>
+        <p class="f4-pic4">pic</p>
+        <p class="f4-pic5">pic</p>
+        <p class="f4-pic6">pic</p> */}
       </div>
       <div class="foot-dis">
         <p>© Copyright 2021. JustAPPin’ LLC. All Right Reserved.</p>

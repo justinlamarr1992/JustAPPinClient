@@ -4,6 +4,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import NavBar from "./components/nav/NavBar";
+import Footer from "./components/nav/Footer";
+
 import Home from "./pages/Home";
 import Store from "./pages/Store";
 import RegisterComplete from "./pages/auth/RegisterComplete";
@@ -15,6 +18,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 
 // Product Management
 import AllProducts from "./pages/admin/product/AllProducts";
+import Product from "./pages/Product";
 import CategoryCreate from "./pages/admin/category/CategoryCreate";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 import SubCreate from "./pages/admin/sub/SubCreate";
@@ -25,7 +29,6 @@ import ProductUpdate from "./pages/admin/product/ProductUpdate";
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
 
-import NavBar from "./components/nav/NavBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -72,6 +75,8 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/store" element={<Store />} />
+        <Route path="/product/:slug" element={<Product />} />
+
         {/* User Routes */}
         <Route
           path="/user/history"
@@ -163,6 +168,8 @@ const App = () => {
           }
         />
       </Routes>
+
+      <Footer />
     </BrowserRouter>
   );
 };

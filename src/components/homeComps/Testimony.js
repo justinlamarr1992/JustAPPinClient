@@ -4,6 +4,7 @@ import ClientYou from "../../images/yourcompany.png";
 import ClientWeb from "../../images/iWaxWeb.png";
 
 const Testimony = () => {
+  // Make this clients switchable
   return (
     <div class="testimony">
       <h2 class="test-title">Past Clients</h2>

@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { getProducts } from "../../functions/product";
+import { getProducts, getProductsCount } from "../../functions/product";
 import ProductCard from "../cards/ProductCard";
 import { useSelector } from "react-redux";
 import Jumbotron from "../cards/Jumbotron";
 import LoadingCard from "../cards/LoadingCard";
+import { Pagination } from "antd";
 
 const NewMerch = () => {
   const { user } = useSelector((state) => ({ ...state }));
   const [products, setProducts] = useState([]);
+  const [productsCount, setProductsCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     loadAllProducts();
+  }, [page]);
+  useEffect(() => {
+    getProductsCount().then((res) => setProductsCount(res.data));
   }, []);
   const loadAllProducts = () => {
     setLoading(true);
     // sort, order, limit
     // acending = asc, decending = desc
-    getProducts("createdAt", "desc", 4).then((res) => {
+    getProducts("createdAt", "desc", page).then((res) => {
       setProducts(res.data);
       setLoading(false);
     });
@@ -24,6 +31,7 @@ const NewMerch = () => {
 
   return (
     <div>
+      {productsCount}
       <div className="container">
         {" "}
         {loading ? (
@@ -37,6 +45,15 @@ const NewMerch = () => {
             ))}
           </div>
         )}
+      </div>
+      <div className="row">
+        <nav className="col-md-4 offset-md-4 text-center pt-5 p-3">
+          <Pagination
+            current={page}
+            total={(productsCount / 3) * 10}
+            onChange={(values) => setPage(values)}
+          />
+        </nav>{" "}
       </div>
     </div>
   );

@@ -17,7 +17,6 @@ const Home = () => {
       <Perk />
       <Benefit />
       <CTA />
-      <Footer />
     </div>
   );
 };
