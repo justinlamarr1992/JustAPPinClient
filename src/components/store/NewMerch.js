@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getProducts, getProductsCount } from "../../functions/product";
 import ProductCard from "../cards/ProductCard";
 import { useSelector } from "react-redux";
-import Jumbotron from "../cards/Jumbotron";
 import LoadingCard from "../cards/LoadingCard";
 import { Pagination } from "antd";
 
@@ -16,9 +15,14 @@ const NewMerch = () => {
   useEffect(() => {
     loadAllProducts();
   }, [page]);
+
+  // useEffect(() => {
+  //   getProductsCount().then((res) => setProductsCount(res.data));
+  // }, []);
   useEffect(() => {
     getProductsCount().then((res) => setProductsCount(res.data));
   }, []);
+
   const loadAllProducts = () => {
     setLoading(true);
     // sort, order, limit

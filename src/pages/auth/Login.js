@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
@@ -14,20 +14,36 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
   let dispatch = useDispatch();
 
-  const roleBasedRedirect = (res) => {
-    if (res.data.role === "admin") {
-      navigate("/admin/dashboard");
+  const { user } = useSelector((state) => ({ ...state }));
+  // useEffect(() => {
+  //   if (user && user.token) navigate("/");
+  // }, [user, navigate]);
+
+  useEffect(() => {
+    let intended = location.state;
+    if (intended) {
+      return;
     } else {
-      navigate("/user/history");
+      if (user && user.token) navigate("/");
+    }
+  }, [user, navigate]);
+
+  const roleBasedRedirect = (res) => {
+    // may be the problem here cause history is not used anymore
+    let intended = location.state;
+    if (intended) {
+      navigate(intended.from);
+    } else {
+      if (res.data.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/user/history");
+      }
     }
   };
-
-  const { user } = useSelector((state) => ({ ...state }));
-  useEffect(() => {
-    if (user && user.token) navigate("/");
-  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

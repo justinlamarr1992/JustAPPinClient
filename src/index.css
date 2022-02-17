@@ -119,8 +119,8 @@ body {
   i {
     color: var(--pri-c);
   }
-
-  button,
+  /* FIX THIS */
+  /* button,
   .hero-link,
   .footer-link,
   input[type="button"],
@@ -132,16 +132,13 @@ body {
     background-color: var(--pri-c);
     color: var(--sec-t);
     width: 170px;
-    /* width: 200px; */
     height: 48px;
-    /* height: 60px; */
     border: none;
     border-radius: var(--brad);
     cursor: pointer;
-    /* padding: 16px 32px; */
     text-decoration: none;
     margin: 4px 2px;
-  }
+  } */
   a:hover {
     color: var(--sec-c);
   }
