@@ -4,6 +4,9 @@ import Jumbotron from "../components/cards/Jumbotron";
 import NewMerch from "../components/store/NewMerch";
 import HotItems from "../components/store/HotItems";
 
+import CategoryList from "../components/category/CategoryList";
+import SubList from "../components/sub/SubList";
+
 const Store = () => {
   const { user } = useSelector((state) => ({ ...state }));
 
@@ -23,6 +26,12 @@ const Store = () => {
           Hot Items
         </h4>
         <HotItems />
+        <h4 className="text-center p-3 mt-5 mb-5 display-4 Jumbotron">Logos</h4>
+        <CategoryList />
+        <h4 className="text-center p-3 mt-5 mb-5 display-4 Jumbotron">
+          Sub Categories
+        </h4>
+        <SubList />
         <br />
         <br />
       </div>

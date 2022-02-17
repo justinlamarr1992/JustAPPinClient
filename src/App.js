@@ -15,6 +15,8 @@ import History from "./pages/user/History";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import CategoryHome from "./pages/category/CategoryHome";
+import SubHome from "./pages/sub/SubHome";
 
 // Product Management
 import AllProducts from "./pages/admin/product/AllProducts";
@@ -76,6 +78,8 @@ const App = () => {
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/store" element={<Store />} />
         <Route path="/product/:slug" element={<Product />} />
+        <Route path="/category/:slug" element={<CategoryHome />} />
+        <Route path="/sub/:slug" element={<SubHome />} />
 
         {/* User Routes */}
         <Route
