@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { Menu, Image, Layout } from "antd";
 import { Link } from "react-router-dom";
 import Logo from "../../images/Logo.png";
+import Search from "../forms/Search";
 
 // ERROR MAY COME FROM HERE
 import firebase from "firebase/compat";
@@ -17,6 +18,7 @@ import {
   UserAddOutlined,
   SettingOutlined,
   LogoutOutlined,
+  ShoppingOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu, Item } = Menu;
@@ -58,8 +60,12 @@ const NavBar = () => {
       <Item key="home" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
       </Item>
+
       <Item key="store" icon={<ShoppingCartOutlined />}>
         <Link to="/store">Store</Link>
+      </Item>
+      <Item key="shop" icon={<ShoppingOutlined />}>
+        <Link to="/shop">Shop</Link>
       </Item>
       {!user && (
         <Item key="register" className=" float-end" icon={<UserAddOutlined />}>
@@ -95,6 +101,9 @@ const NavBar = () => {
           </Item>
         </SubMenu>
       )}
+      <span className="float-right p-1">
+        <Search />
+      </span>
     </Menu>
   );
 };

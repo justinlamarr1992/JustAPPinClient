@@ -9,6 +9,7 @@ import Footer from "./components/nav/Footer";
 
 import Home from "./pages/Home";
 import Store from "./pages/Store";
+import Shop from "./pages/Shop";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import History from "./pages/user/History";
@@ -77,6 +78,7 @@ const App = () => {
         <Route path="/register/complete" element={<RegisterComplete />} />
         <Route path="/forgot/password" element={<ForgotPassword />} />
         <Route path="/store" element={<Store />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/category/:slug" element={<CategoryHome />} />
         <Route path="/sub/:slug" element={<SubHome />} />
