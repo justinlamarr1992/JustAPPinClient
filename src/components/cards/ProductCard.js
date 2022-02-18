@@ -8,7 +8,15 @@ import { showAverage } from "../../functions/rating";
 const { Meta } = Card;
 
 const ProductCard = ({ product }) => {
-  const { images, title, description, slug } = product;
+  const { images, title, description, slug, price } = product;
+  const gridStyle = {
+    width: "50%",
+    textAlign: "left",
+  };
+  const gridStyle2 = {
+    width: "50%",
+    textAlign: "center",
+  };
 
   return (
     <>
@@ -18,10 +26,11 @@ const ProductCard = ({ product }) => {
         <div className="text-center pt-1 pb-3">No Ratings Yet</div>
       )}
       <Card
+        hoverable={true}
         cover={
           <img
             src={images && images.length ? images[0].url : Logo}
-            style={{ height: "150px", objectFit: "cover" }}
+            style={{ height: "250px", objectFit: "contain" }}
             className="p-1"
           />
         }
@@ -38,10 +47,18 @@ const ProductCard = ({ product }) => {
           </>,
         ]}
       >
-        <Meta
-          title={title}
-          description={`${description && description.substring(0, 40)}...`}
-        />
+        <div className="productCard">
+          <div className="productCard-title">
+            <h4>{`${title}`}</h4>
+          </div>
+          <div className="productCard-description">{`${
+            description && description.substring(0, 40)
+          }...`}</div>
+          {/* TODO: HAve tese shimerer random colors of log */}
+          <div className="productCard-price">
+            <h4>{` $${price}`}</h4>
+          </div>
+        </div>
       </Card>
     </>
   );

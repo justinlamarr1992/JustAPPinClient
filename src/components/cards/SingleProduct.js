@@ -29,7 +29,15 @@ const SingleProduct = ({ product, onStarClick, star }) => {
                 images.map((i) => <img src={i.url} key={i.public_id} />)}
             </Carousel>
           ) : (
-            <Card cover={<img src={Logo} className="mb-3 card-image" />}>
+            <Card
+              cover={
+                <img
+                  src={Logo}
+                  style={{ height: "250px", objectFit: "contain" }}
+                  className="mb-3 card-image"
+                />
+              }
+            >
               {" "}
             </Card>
           )}{" "}
