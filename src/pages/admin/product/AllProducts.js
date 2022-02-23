@@ -58,7 +58,7 @@ const AllProducts = () => {
           )}
           <div className="row">
             {products.map((product) => (
-              <div key={product._id} className="col-md-4 pb-3">
+              <div key={product._id} className="col-md-4 mt-3">
                 <AdminProductCard
                   product={product}
                   handleRemove={handleRemove}

@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
+import Star from "../components/forms/Star";
 import {
   getProductsByCount,
   fetchProductsByFilter,
 } from "../functions/product";
 import { getCategories } from "../functions/category";
+import { getSubs } from "../functions/sub";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../components/cards/ProductCard";
 import { Menu, Slider, Checkbox } from "antd";
-import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
+import {
+  DollarOutlined,
+  DownSquareOutlined,
+  StarOutlined,
+} from "@ant-design/icons";
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -18,6 +24,9 @@ const Shop = () => {
   const [ok, setOk] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categoryIds, setCategoryIds] = useState([]);
+  const [star, setStar] = useState("");
+  const [subs, setSubs] = useState([]);
+  const [sub, setSub] = useState("");
 
   let dispatch = useDispatch();
   let { search } = useSelector((state) => ({ ...state }));
@@ -26,6 +35,7 @@ const Shop = () => {
   useEffect(() => {
     loadAllProducts();
     getCategories().then((res) => setCategories(res.data));
+    getSubs().then((res) => setSubs(res.data));
   }, []);
 
   const fetchProducts = (arg) => {
@@ -63,6 +73,8 @@ const Shop = () => {
     });
     setPrice(value);
     setCategoryIds([]);
+    setStar("");
+    setSub("");
     setTimeout(() => {
       setOk(!ok);
     }, 300);
@@ -102,8 +114,58 @@ const Shop = () => {
       inTheState.splice(foundInTheState, 1);
     }
     setCategoryIds(inTheState);
-    // console.log(inTheState);
+    setStar("");
+    setSub("");
     fetchProducts({ category: inTheState });
+  };
+
+  // 5. Show ProductsbyStarRating
+  const handleStarClick = (num) => {
+    console.log(num);
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice([0, 0]);
+    setCategoryIds([]);
+    setStar(num);
+    setSub("");
+    fetchProducts({ stars: num });
+  };
+
+  const showStars = () => (
+    <div className="pr-4 lp-4 pb-2">
+      <Star starClick={handleStarClick} numberOfStars={5} />
+      <Star starClick={handleStarClick} numberOfStars={4} />
+      <Star starClick={handleStarClick} numberOfStars={3} />
+      <Star starClick={handleStarClick} numberOfStars={2} />
+      <Star starClick={handleStarClick} numberOfStars={1} />
+    </div>
+  );
+
+  const showSubs = () =>
+    subs.map((s) => (
+      <div
+        key={s._id}
+        onClick={() => handleSub(s)}
+        className="p-1 m-1 badge bg-secondary"
+        style={{ cursor: "pointer" }}
+      >
+        {s.name}
+      </div>
+    ));
+
+  const handleSub = (sub) => {
+    // console.log('Sub', s)
+    setSub(sub);
+    dispatch({
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
+    });
+    setPrice([0, 0]);
+    setCategoryIds([]);
+    setStar("");
+    fetchProducts({ sub: sub });
   };
 
   return (
@@ -147,6 +209,32 @@ const Shop = () => {
             >
               {/* Test code to use Pictures instead of text */}
               <div style={{ marginTop: "-10px" }}>{showCategories()}</div>
+            </SubMenu>
+            {/* Stars */}
+            <SubMenu
+              key="3"
+              title={
+                <h6 className="h6">
+                  <StarOutlined />
+                  Rating
+                </h6>
+              }
+            >
+              {/* Test code to use Pictures instead of text */}
+              <div style={{ marginTop: "-10px" }}>{showStars()}</div>
+            </SubMenu>
+            {/* Subs */}
+            <SubMenu
+              key="4"
+              title={
+                <h6 className="h6">
+                  <DownSquareOutlined />
+                  Items
+                </h6>
+              }
+            >
+              {/* Test code to use Pictures instead of text */}
+              <div style={{ marginTop: "-10px" }}>{showSubs()}</div>
             </SubMenu>
           </Menu>
         </div>
