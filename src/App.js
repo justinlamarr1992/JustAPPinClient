@@ -6,6 +6,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import NavBar from "./components/nav/NavBar";
 import Footer from "./components/nav/Footer";
+import SideDrawer from "./components/drawer/SideDrawer";
 
 import Home from "./pages/Home";
 import Store from "./pages/Store";
@@ -18,6 +19,8 @@ import Wishlist from "./pages/user/Wishlist";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import CategoryHome from "./pages/category/CategoryHome";
 import SubHome from "./pages/sub/SubHome";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 // Product Management
 import AllProducts from "./pages/admin/product/AllProducts";
@@ -70,6 +73,7 @@ const App = () => {
     <BrowserRouter>
       <NavBar style={{ position: "sticky", zIndex: 1, width: "100%" }} />
       <ToastContainer />
+      <SideDrawer />
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -82,6 +86,7 @@ const App = () => {
         <Route path="/product/:slug" element={<Product />} />
         <Route path="/category/:slug" element={<CategoryHome />} />
         <Route path="/sub/:slug" element={<SubHome />} />
+        <Route path="/cart" element={<Cart />} />
 
         {/* User Routes */}
         <Route
@@ -105,6 +110,14 @@ const App = () => {
           element={
             <UserRoute>
               <Wishlist />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <UserRoute>
+              <Checkout />
             </UserRoute>
           }
         />

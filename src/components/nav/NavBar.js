@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // replaced use history
 import { useNavigate } from "react-router";
-import { Menu, Image, Layout } from "antd";
+import { Menu, Image, Layout, Badge } from "antd";
 import { Link } from "react-router-dom";
 import Logo from "../../images/Logo.png";
 import Search from "../forms/Search";
@@ -13,12 +13,12 @@ import firebase from "firebase/compat";
 import {
   HomeOutlined,
   ShoppingCartOutlined,
-  LoginOutlined,
   UserOutlined,
   UserAddOutlined,
   SettingOutlined,
   LogoutOutlined,
   ShoppingOutlined,
+  SkinOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu, Item } = Menu;
@@ -28,7 +28,7 @@ const NavBar = () => {
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  let { user } = useSelector((state) => ({ ...state }));
+  let { user, cart } = useSelector((state) => ({ ...state }));
 
   const handleClick = (e) => {
     // console.log(e.key);
@@ -61,12 +61,20 @@ const NavBar = () => {
         <Link to="/">Home</Link>
       </Item>
 
-      <Item key="store" icon={<ShoppingCartOutlined />}>
-        <Link to="/store">Store</Link>
+      <Item key="store" icon={<SkinOutlined />}>
+        <Link to="/store">Store Page</Link>
       </Item>
       <Item key="shop" icon={<ShoppingOutlined />}>
         <Link to="/shop">Shop</Link>
       </Item>
+      <Item key="cart" icon={<ShoppingCartOutlined />}>
+        <Link to="/cart">
+          <Badge count={cart.length} offset={[9, 0]}>
+            Cart
+          </Badge>
+        </Link>
+      </Item>
+
       {!user && (
         <Item key="register" className=" float-end" icon={<UserAddOutlined />}>
           <Link to="/register">Register</Link>

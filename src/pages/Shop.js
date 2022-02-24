@@ -86,6 +86,9 @@ const Shop = () => {
     // console.log("text", text);
     const delayed = setTimeout(() => {
       fetchProducts({ query: text });
+      if (!text) {
+        loadAllProducts();
+      }
       return () => clearTimeout(delayed);
     }, 300);
   }, [text]);
