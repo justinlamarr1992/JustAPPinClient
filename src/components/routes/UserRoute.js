@@ -1,29 +1,44 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Routes, Route, Link } from "react-router-dom";
 import { Navigate } from "react-router";
-import LoadingToRedirect from "./LoadingToRedirect";
-
-// COME BACK TO THIS
-
-// const UserRoute = ({ children, ...rest }) => {
-//   const { user } = useSelector((state) => ({ ...state }));
-
-//   return user && user.token ? (
-//     <Routes>
-//       <Route {...rest} />
-//     </Routes>
-//   ) : (
-//     <LoadingToRedirect />
-//   );
-// };
 
 const UserRoute = ({ children }) => {
   const { user } = useSelector((state) => ({ ...state }));
-  if (!user && user.token) {
+  if (!user) {
     return <Navigate to="/login" />;
   }
   return children;
 };
+// const UserRoute = ({ children }) => {
+//   //access auth from state
+//   const { user } = useSelector((state) => ({ ...state }));
+//   console.log(user.userState);
+//   return user && user.userState && user.userState.token ? (
+//     children
+//   ) : (
+//     <Navigate to="/login" />
+//   );
+// };
+// export default UserRoute;
+
+// const UserRoute = ({ children }) => {
+//   const { user } = useSelector((state) => ({ ...state }));
+//   if (!user && user.token) {
+//     return <Navigate to="/login" />;
+//   }
+//   return children;
+// };
+
+// const PrivateRoute = ({ children }) => {
+//   //access auth from state
+//   const { auth } = useSelector((state) => ({ ...state }));
+//   //   console.log(auth.userState);
+//   return auth && auth.userState && auth.userState.token ? (
+//     children
+//   ) : (
+//     <Navigate to="/login" />
+//   );
+// };
+//  export default PrivateRoute;
 
 export default UserRoute;

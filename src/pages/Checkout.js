@@ -6,18 +6,20 @@ import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
+// const { street, street2, city, state, zip } = address;
+
 const Checkout = () => {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
-  // const [address, setAddress] = useState("");
-  const [street, setStreet] = useState("");
-  const [street2, setStreet2] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zip, setZip] = useState("");
+  const [address, setAddress] = useState("");
+  // const [street, setStreet] = useState("");
+  // const [street2, setStreet2] = useState("");
+  // const [city, setCity] = useState("");
+  // const [state, setState] = useState("");
+  // const [zip, setZip] = useState("");
   const [addressSaved, setAddressSaved] = useState(false);
   // address destructure
-  // const { street, street2, city, state, zip } = address;
+  let { street, street2, city, state, zip } = address;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,49 +32,92 @@ const Checkout = () => {
       setTotal(res.data.cartTotal);
     });
   }, []);
+
+  // destructured address test
   const addressUpdate = (e) => {
-    setStreet(e.target.value);
-    console.log(setStreet);
+    street = e.target.value;
+    console.log(street);
   };
   const aptUpdate = (e) => {
-    setStreet2(e.target.value);
-    console.log(setStreet2);
+    street2 = e.target.value;
+    console.log(street2);
   };
   const cityUpdate = (e) => {
-    setCity(e.target.value);
-    console.log(setCity);
+    city = e.target.value;
+    console.log(city);
   };
   const stateUpdate = (e) => {
-    setState(e.target.value);
-    console.log(setState);
+    state = e.target.value;
+    console.log(state);
   };
   const zipUpdate = (e) => {
-    setZip(e.target.value);
-    console.log(setZip);
+    zip = e.target.value;
+    console.log(zip);
   };
+  // destructured address test
+
+  // Multiple setState Test
+  // const addressUpdate = (e) => {
+  //   setStreet(e.target.value);
+  //   console.log(setStreet);
+  // };
+  // const aptUpdate = (e) => {
+  //   setStreet2(e.target.value);
+  //   console.log(setStreet2);
+  // };
+  // const cityUpdate = (e) => {
+  //   setCity(e.target.value);
+  //   console.log(setCity);
+  // };
+  // const stateUpdate = (e) => {
+  //   setState(e.target.value);
+  //   console.log(setState);
+  // };
+  // const zipUpdate = (e) => {
+  //   setZip(e.target.value);
+  //   console.log(setZip);
+  // };
+  // Multiple setState Test
 
   const saveAddressToDb = () => {
-    console.log(street);
-    console.log(street2);
-    console.log(city);
-    console.log(state);
-    console.log(zip);
+    // Multiple set state test
+    // console.log(street);
+    // console.log(street2);
+    // console.log(city);
+    // console.log(state);
+    // console.log(zip);
+    // multiple set state test
+
+    // destructured address test
     // console.log(address);
     // console.log(address.street);
     // console.log(address.street2);
     // console.log(address.city);
     // console.log(address.state);
     // console.log(address.zip);
-    // tis is where should think about diff parts of address
-    // saveUserAddress(user.token, address).then((res) => {
-    saveUserAddress(user.token, street, street2, city, state, zip).then(
-      (res) => {
+    // destructured address test
+
+    // destructured address test
+    saveUserAddress(user.token, address)
+      .then((res) => {
         if (res.data.ok) {
           setAddressSaved(true);
           toast.success("Address Saved");
         }
-      }
-    );
+      })
+      .catch((err) => console.log(err));
+    // destructured address test
+
+    // Multiple set state test
+    saveUserAddress(user.token, address)
+      .then((res) => {
+        if (res.data.ok) {
+          setAddressSaved(true);
+          toast.success("Address Saved");
+        }
+      })
+      .catch((err) => console.log(err));
+    // Multiple set state test
   };
 
   const emptyCart = () => {
@@ -100,6 +145,22 @@ const Checkout = () => {
         <br />
         {/* This will be the different inputs */}
         {/* <ReactQuill theme="snow" value={address} onChange={setAddress} /> */}
+        {/* Multiple set state test */}
+        {/* <form>
+          <label>Address: </label>
+          <input required type="text" onChange={addressUpdate} />
+          <label>Apt. Number: </label>
+          <input type="text" onChange={aptUpdate} />
+          <label>City: </label>
+          <input required type="text" onChange={cityUpdate} />
+          <label>State: </label>
+          <input required type="text" onChange={stateUpdate} />
+          <label>Zip: </label>
+          <input required type="Number" onChange={zipUpdate} />
+          <button onClick={saveAddressToDb}>Lets see</button>
+        </form> */}
+        {/* Multiple set state test */}
+        {/* Destructed Address Test */}
         <form>
           <label>Address: </label>
           <input required type="text" onChange={addressUpdate} />
@@ -113,6 +174,7 @@ const Checkout = () => {
           <input required type="Number" onChange={zipUpdate} />
           <button onClick={saveAddressToDb}>Lets see</button>
         </form>
+        {/* Destructed Address Test */}
         {/* <button className="btn btn-primary mt-2" onClick={saveAddressToDb}>
           Save
         </button>  */}
