@@ -18,24 +18,20 @@ const Login = () => {
   let dispatch = useDispatch();
 
   const { user } = useSelector((state) => ({ ...state }));
-  // useEffect(() => {
-  //   if (user && user.token) navigate("/");
-  // }, [user, navigate]);
 
   useEffect(() => {
     let intended = location.state;
     if (intended) {
       return;
     } else {
-      if (user && user.token) navigate("/");
+      if (user && user.token) navigate("/", { replace: true });
     }
   }, [user, navigate]);
 
   const roleBasedRedirect = (res) => {
-    // may be the problem here cause history is not used anymore
     let intended = location.state;
     if (intended) {
-      navigate(intended.from);
+      navigate(intended.from, { replace: true });
     } else {
       if (res.data.role === "admin") {
         navigate("/admin/dashboard");
@@ -48,7 +44,24 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // console.table(email, password);
+    console.table(email, password);
+    // try {
+    //   let res = await auth.signInWithEmailAndPassword(email, password);
+    //   if (res.data) {
+    //     console.log(
+    //       "SAVE USER RES IN REDUX AND LOCAL STORAGE THE REDIRECT ==>"
+    //     );
+    //     console.log(res.data);
+    //     // save user and token to redux
+    //     dispatch({ type: "LOGGED_IN_USER", payload: res.data });
+    //     navigate("/dashboard");
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   if (err.response.status === 400) toast.error(err.response.data);
+    //   setLoading(false);
+    // }
+
     try {
       const result = await auth.signInWithEmailAndPassword(email, password);
       console.log(result);
@@ -77,6 +90,10 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  // Testing onlines
+  // TESTING ONLINES
+
   const googleLogin = async () => {
     auth
       .signInWithPopup(googleAuthProvider)
