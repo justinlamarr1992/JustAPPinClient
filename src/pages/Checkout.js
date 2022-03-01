@@ -104,7 +104,7 @@ const Checkout = () => {
           <label>Address: </label>
           <input required type="text" onChange={addressUpdate} />
           <label>Apt. Number: </label>
-          <input required type="text" onChange={aptUpdate} />
+          <input type="text" onChange={aptUpdate} />
           <label>City: </label>
           <input required type="text" onChange={cityUpdate} />
           <label>State: </label>
