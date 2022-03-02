@@ -6,19 +6,28 @@ import { toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-// const { street, street2, city, state, zip } = address;
-
 const Checkout = () => {
+  // testing nested useStates
+
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
-  const [address, setAddress] = useState("");
+  // Multiple set state test
+  // const [address, setAddress] = useState("");
   // const [street, setStreet] = useState("");
   // const [street2, setStreet2] = useState("");
   // const [city, setCity] = useState("");
   // const [state, setState] = useState("");
   // const [zip, setZip] = useState("");
+  // Multiple set state test
   const [addressSaved, setAddressSaved] = useState(false);
-  // address destructure
+
+  let address = {
+    street: String,
+    street2: String,
+    city: String,
+    state: String,
+    zip: Number,
+  };
   let { street, street2, city, state, zip } = address;
 
   const dispatch = useDispatch();
@@ -35,69 +44,35 @@ const Checkout = () => {
 
   // destructured address test
   const addressUpdate = (e) => {
-    street = e.target.value;
-    console.log(street);
+    address.street = e.target.value;
+    console.log(address.street);
   };
   const aptUpdate = (e) => {
-    street2 = e.target.value;
-    console.log(street2);
+    address.street2 = e.target.value;
+    console.log(address.street2);
   };
   const cityUpdate = (e) => {
-    city = e.target.value;
-    console.log(city);
+    address.city = e.target.value;
+    console.log(address.city);
   };
   const stateUpdate = (e) => {
-    state = e.target.value;
-    console.log(state);
+    address.state = e.target.value;
+    console.log(address.state);
   };
   const zipUpdate = (e) => {
-    zip = e.target.value;
-    console.log(zip);
+    address.zip = e.target.value;
+    console.log(address.zip);
   };
-  // destructured address test
 
-  // Multiple setState Test
-  // const addressUpdate = (e) => {
-  //   setStreet(e.target.value);
-  //   console.log(setStreet);
-  // };
-  // const aptUpdate = (e) => {
-  //   setStreet2(e.target.value);
-  //   console.log(setStreet2);
-  // };
-  // const cityUpdate = (e) => {
-  //   setCity(e.target.value);
-  //   console.log(setCity);
-  // };
-  // const stateUpdate = (e) => {
-  //   setState(e.target.value);
-  //   console.log(setState);
-  // };
-  // const zipUpdate = (e) => {
-  //   setZip(e.target.value);
-  //   console.log(setZip);
-  // };
-  // Multiple setState Test
+  const saveAddressToDb = (e) => {
+    e.preventDefault();
+    console.log(street);
+    console.log(street2);
+    console.log(city);
+    console.log(state);
+    console.log(zip);
+    console.log(address);
 
-  const saveAddressToDb = () => {
-    // Multiple set state test
-    // console.log(street);
-    // console.log(street2);
-    // console.log(city);
-    // console.log(state);
-    // console.log(zip);
-    // multiple set state test
-
-    // destructured address test
-    // console.log(address);
-    // console.log(address.street);
-    // console.log(address.street2);
-    // console.log(address.city);
-    // console.log(address.state);
-    // console.log(address.zip);
-    // destructured address test
-
-    // destructured address test
     saveUserAddress(user.token, address)
       .then((res) => {
         if (res.data.ok) {
@@ -106,18 +81,6 @@ const Checkout = () => {
         }
       })
       .catch((err) => console.log(err));
-    // destructured address test
-
-    // Multiple set state test
-    saveUserAddress(user.token, address)
-      .then((res) => {
-        if (res.data.ok) {
-          setAddressSaved(true);
-          toast.success("Address Saved");
-        }
-      })
-      .catch((err) => console.log(err));
-    // Multiple set state test
   };
 
   const emptyCart = () => {
@@ -143,41 +106,51 @@ const Checkout = () => {
         <h4>Delivery Address</h4>
         <br />
         <br />
-        {/* This will be the different inputs */}
-        {/* <ReactQuill theme="snow" value={address} onChange={setAddress} /> */}
-        {/* Multiple set state test */}
-        {/* <form>
-          <label>Address: </label>
-          <input required type="text" onChange={addressUpdate} />
-          <label>Apt. Number: </label>
-          <input type="text" onChange={aptUpdate} />
-          <label>City: </label>
-          <input required type="text" onChange={cityUpdate} />
-          <label>State: </label>
-          <input required type="text" onChange={stateUpdate} />
-          <label>Zip: </label>
-          <input required type="Number" onChange={zipUpdate} />
-          <button onClick={saveAddressToDb}>Lets see</button>
-        </form> */}
-        {/* Multiple set state test */}
-        {/* Destructed Address Test */}
         <form>
           <label>Address: </label>
-          <input required type="text" onChange={addressUpdate} />
+          <input
+            required
+            type="text"
+            name="street"
+            value={address.street}
+            // value="Street"
+            onChange={addressUpdate}
+          />
           <label>Apt. Number: </label>
-          <input type="text" onChange={aptUpdate} />
+          <input
+            type="text"
+            name="street2"
+            value={address.street2}
+            onChange={aptUpdate}
+          />
           <label>City: </label>
-          <input required type="text" onChange={cityUpdate} />
+          <input
+            required
+            type="text"
+            name="city"
+            value={address.city}
+            onChange={cityUpdate}
+          />
           <label>State: </label>
-          <input required type="text" onChange={stateUpdate} />
+          <input
+            required
+            type="text"
+            name="state"
+            value={address.state}
+            onChange={stateUpdate}
+          />
           <label>Zip: </label>
-          <input required type="Number" onChange={zipUpdate} />
-          <button onClick={saveAddressToDb}>Lets see</button>
+          <input
+            required
+            type="Number"
+            name="zip"
+            value={address.zip}
+            onChange={zipUpdate}
+          />
+          <button type="submit" onClick={saveAddressToDb}>
+            Lets see
+          </button>
         </form>
-        {/* Destructed Address Test */}
-        {/* <button className="btn btn-primary mt-2" onClick={saveAddressToDb}>
-          Save
-        </button>  */}
         <hr />
         <h4>Discounts</h4>
         <br />
