@@ -19,8 +19,11 @@ import Wishlist from "./pages/user/Wishlist";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import CategoryHome from "./pages/category/CategoryHome";
 import SubHome from "./pages/sub/SubHome";
+
+// User Purchase
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
 
 // Product Management
 import AllProducts from "./pages/admin/product/AllProducts";
@@ -31,6 +34,7 @@ import SubCreate from "./pages/admin/sub/SubCreate";
 import SubUpdate from "./pages/admin/sub/SubUpdate";
 import ProductCreate from "./pages/admin/product/ProductCreate";
 import ProductUpdate from "./pages/admin/product/ProductUpdate";
+import CreateDiscountPage from "./pages/admin/discount/CreateDiscountPage";
 
 import AdminRoute from "./components/routes/AdminRoute";
 import UserRoute from "./components/routes/UserRoute";
@@ -121,6 +125,15 @@ const App = () => {
             </UserRoute>
           }
         />
+        <Route
+          path="/payment"
+          element={
+            <UserRoute>
+              <Payment />
+            </UserRoute>
+          }
+        />
+
         {/* Admin Routes */}
         <Route
           path="/admin/dashboard"
@@ -183,6 +196,14 @@ const App = () => {
           element={
             <AdminRoute>
               <ProductUpdate />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/admin/discount"
+          element={
+            <AdminRoute>
+              <CreateDiscountPage />
             </AdminRoute>
           }
         />

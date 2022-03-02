@@ -19,8 +19,8 @@ const AdminNav = () => (
         <Link to="/admin/sub" className="nav-link">
           SubCategory
         </Link>
-        <Link to="/admin/coupon" className="nav-link">
-          Coupon
+        <Link to="/admin/discount" className="nav-link">
+          Discounts
         </Link>
         <Link to="/admin/password" className="nav-link">
           Password

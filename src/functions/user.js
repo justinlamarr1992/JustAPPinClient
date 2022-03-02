@@ -25,31 +25,6 @@ export const emptyUserCart = async (authtoken) =>
     },
   });
 
-// Multiple set State test
-// export const saveUserAddress = async (
-//   authtoken,
-//   street,
-//   street2,
-//   city,
-//   state,
-//   zip
-// ) =>
-//   await axios.post(
-//     `${process.env.REACT_APP_API}/user/address`,
-//     { street },
-//     { street2 },
-//     { city },
-//     { state },
-//     { zip },
-//     {
-//       headers: {
-//         authtoken,
-//       },
-//     }
-//   );
-// Multiple set State test
-
-// Destructured Test
 export const saveUserAddress = async (authtoken, address) =>
   await axios.post(
     `${process.env.REACT_APP_API}/user/address`,
@@ -61,4 +36,13 @@ export const saveUserAddress = async (authtoken, address) =>
     }
   );
 
-// Destructured Test
+export const applyDiscount = async (authtoken, discount) =>
+  await axios.post(
+    `${process.env.REACT_APP_API}/user/cart/discount`,
+    { discount },
+    {
+      headers: {
+        authtoken,
+      },
+    }
+  );
