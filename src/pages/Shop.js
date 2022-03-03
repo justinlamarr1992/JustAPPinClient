@@ -219,6 +219,7 @@ const Shop = () => {
   const showArticles = () =>
     articles.map((a) => (
       <Radio
+        key={a}
         value={a}
         name={a}
         checked={a === article}
@@ -248,6 +249,7 @@ const Shop = () => {
   const showColors = () =>
     colors.map((c) => (
       <Radio
+        key={c}
         value={c}
         name={c}
         checked={c === color}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
+import { createOrder, emptyUserCart } from "../functions/user";
 import { createPaymentIntent } from "../functions/stripe";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Card } from "antd";
@@ -25,12 +26,14 @@ const StripeCheckout = () => {
   const elements = useElements();
 
   useEffect(() => {
-    createPaymentIntent(user.token).then((res) => {
+    createPaymentIntent(user.token, discount).then((res) => {
       console.log("create payment intent", res.data);
       setClientSecret(res.data.clientSecret);
       // additional response recieved on Successful Paayment
       setCartTotal(res.data.cartTotal);
+
       setTotalAfterDiscount(res.data.totalAfterDiscount);
+
       setPayable(res.data.payable);
     });
   }, []);
@@ -53,6 +56,24 @@ const StripeCheckout = () => {
     } else {
       // here yu get the result after success payment
       // create order and save in database for admin to process
+      createOrder(payload, user.token).then((res) => {
+        if (res.data.ok) {
+          // empty cart from local Storage
+          if (typeof window !== "undefined") localStorage.removeItem("cart");
+          // empty cart from redux
+          dispatch({
+            type: "ADD_TO_CART",
+            payload: [],
+          });
+          // reset discount to false
+          dispatch({
+            type: "DISCOUNT_APPLIED",
+            payload: false,
+          });
+          // empty cart from database
+          emptyUserCart(user.token);
+        }
+      });
       // empty user cart from redux store and local storage
       console.log(JSON.stringify(payload, null, 4));
       setError(null);
@@ -60,6 +81,7 @@ const StripeCheckout = () => {
       setSucceeded(true);
     }
   };
+
   const handleChange = async (e) => {
     //   listen for changes in the card element
     // display any errors as the customer types card details
