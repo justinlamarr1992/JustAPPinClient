@@ -1,49 +1,48 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import NavBar from "./components/nav/NavBar";
-import Footer from "./components/nav/Footer";
-import SideDrawer from "./components/drawer/SideDrawer";
-
-import Home from "./pages/Home";
-import Store from "./pages/Store";
-import Shop from "./pages/Shop";
-import RegisterComplete from "./pages/auth/RegisterComplete";
-import ForgotPassword from "./pages/auth/ForgotPassword";
-import History from "./pages/user/History";
-import Password from "./pages/user/Password";
-import Wishlist from "./pages/user/Wishlist";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import CategoryHome from "./pages/category/CategoryHome";
-import SubHome from "./pages/sub/SubHome";
-
-// User Purchase
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import Payment from "./pages/Payment";
-
-// Product Management
-import AllProducts from "./pages/admin/product/AllProducts";
-import Product from "./pages/Product";
-import CategoryCreate from "./pages/admin/category/CategoryCreate";
-import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
-import SubCreate from "./pages/admin/sub/SubCreate";
-import SubUpdate from "./pages/admin/sub/SubUpdate";
-import ProductCreate from "./pages/admin/product/ProductCreate";
-import ProductUpdate from "./pages/admin/product/ProductUpdate";
-import CreateDiscountPage from "./pages/admin/discount/CreateDiscountPage";
-
-import AdminRoute from "./components/routes/AdminRoute";
-import UserRoute from "./components/routes/UserRoute";
-
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import { auth } from "./firebase";
 import { currentUser } from "./functions/auth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { LoadingOutlined } from "@ant-design/icons";
+
+const Login = lazy(() => import("./pages/auth/Login"));
+const Register = lazy(() => import("./pages/auth/Register"));
+const NavBar = lazy(() => import("./components/nav/NavBar"));
+const Footer = lazy(() => import("./components/nav/Footer"));
+const SideDrawer = lazy(() => import("./components/drawer/SideDrawer"));
+const Home = lazy(() => import("./pages/Home"));
+const Store = lazy(() => import("./pages/Store"));
+const Shop = lazy(() => import("./pages/Shop"));
+const RegisterComplete = lazy(() => import("./pages/auth/RegisterComplete"));
+const ForgotPassword = lazy(() => import("./pages/auth/ForgotPassword"));
+const History = lazy(() => import("./pages/user/History"));
+const Password = lazy(() => import("./pages/user/Password"));
+const Wishlist = lazy(() => import("./pages/user/Wishlist"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const CategoryHome = lazy(() => import("./pages/category/CategoryHome"));
+const SubHome = lazy(() => import("./pages/sub/SubHome"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const Payment = lazy(() => import("./pages/Payment"));
+const AllProducts = lazy(() => import("./pages/admin/product/AllProducts"));
+const Product = lazy(() => import("./pages/Product"));
+const CategoryCreate = lazy(() =>
+  import("./pages/admin/category/CategoryCreate")
+);
+const CategoryUpdate = lazy(() =>
+  import("./pages/admin/category/CategoryUpdate")
+);
+const SubCreate = lazy(() => import("./pages/admin/sub/SubCreate"));
+const SubUpdate = lazy(() => import("./pages/admin/sub/SubUpdate"));
+const ProductCreate = lazy(() => import("./pages/admin/product/ProductCreate"));
+const ProductUpdate = lazy(() => import("./pages/admin/product/ProductUpdate"));
+const CreateDiscountPage = lazy(() =>
+  import("./pages/admin/discount/CreateDiscountPage")
+);
+const AdminRoute = lazy(() => import("./components/routes/AdminRoute"));
+const UserRoute = lazy(() => import("./components/routes/UserRoute"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -74,143 +73,150 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
-      <NavBar style={{ position: "sticky", zIndex: 1, width: "100%" }} />
-      <ToastContainer />
-      <SideDrawer />
+    <Suspense
+      fallback={
+        <div className="col text-center p-5">
+          JustAPPin LLC <LoadingOutlined />
+        </div>
+      }
+    >
+      {" "}
+      <BrowserRouter>
+        <NavBar style={{ position: "sticky", zIndex: 1, width: "100%" }} />
+        <ToastContainer />
+        <SideDrawer />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/register/complete" element={<RegisterComplete />} />
+          <Route path="/forgot/password" element={<ForgotPassword />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/product/:slug" element={<Product />} />
+          <Route path="/category/:slug" element={<CategoryHome />} />
+          <Route path="/sub/:slug" element={<SubHome />} />
+          <Route path="/cart" element={<Cart />} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/register/complete" element={<RegisterComplete />} />
-        <Route path="/forgot/password" element={<ForgotPassword />} />
-        <Route path="/store" element={<Store />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/product/:slug" element={<Product />} />
-        <Route path="/category/:slug" element={<CategoryHome />} />
-        <Route path="/sub/:slug" element={<SubHome />} />
-        <Route path="/cart" element={<Cart />} />
+          {/* User Routes */}
+          <Route
+            path="/user/history"
+            element={
+              <UserRoute>
+                <History />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="/user/password"
+            element={
+              <UserRoute>
+                <Password />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="/user/wishlist"
+            element={
+              <UserRoute>
+                <Wishlist />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <UserRoute>
+                <Checkout />
+              </UserRoute>
+            }
+          />
+          <Route
+            path="/payment"
+            element={
+              <UserRoute>
+                <Payment />
+              </UserRoute>
+            }
+          />
 
-        {/* User Routes */}
-        <Route
-          path="/user/history"
-          element={
-            <UserRoute>
-              <History />
-            </UserRoute>
-          }
-        />
-        <Route
-          path="/user/password"
-          element={
-            <UserRoute>
-              <Password />
-            </UserRoute>
-          }
-        />
-        <Route
-          path="/user/wishlist"
-          element={
-            <UserRoute>
-              <Wishlist />
-            </UserRoute>
-          }
-        />
-        <Route
-          path="/checkout"
-          element={
-            <UserRoute>
-              <Checkout />
-            </UserRoute>
-          }
-        />
-        <Route
-          path="/payment"
-          element={
-            <UserRoute>
-              <Payment />
-            </UserRoute>
-          }
-        />
-
-        {/* Admin Routes */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <AdminRoute>
-              <AdminDashboard />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/products"
-          element={
-            <AdminRoute>
-              <AllProducts />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/category"
-          element={
-            <AdminRoute>
-              <CategoryCreate />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/category/:slug"
-          element={
-            <AdminRoute>
-              <CategoryUpdate />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/sub"
-          element={
-            <AdminRoute>
-              <SubCreate />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/sub/:slug"
-          element={
-            <AdminRoute>
-              <SubUpdate />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/product"
-          element={
-            <AdminRoute>
-              <ProductCreate />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/product/:slug"
-          element={
-            <AdminRoute>
-              <ProductUpdate />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="/admin/discount"
-          element={
-            <AdminRoute>
-              <CreateDiscountPage />
-            </AdminRoute>
-          }
-        />
-      </Routes>
-
-      <Footer />
-    </BrowserRouter>
+          {/* Admin Routes */}
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/products"
+            element={
+              <AdminRoute>
+                <AllProducts />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/category"
+            element={
+              <AdminRoute>
+                <CategoryCreate />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/category/:slug"
+            element={
+              <AdminRoute>
+                <CategoryUpdate />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/sub"
+            element={
+              <AdminRoute>
+                <SubCreate />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/sub/:slug"
+            element={
+              <AdminRoute>
+                <SubUpdate />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/product"
+            element={
+              <AdminRoute>
+                <ProductCreate />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/product/:slug"
+            element={
+              <AdminRoute>
+                <ProductUpdate />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="/admin/discount"
+            element={
+              <AdminRoute>
+                <CreateDiscountPage />
+              </AdminRoute>
+            }
+          />
+        </Routes>
+        <Footer />{" "}
+      </BrowserRouter>
+    </Suspense>
   );
 };
 
