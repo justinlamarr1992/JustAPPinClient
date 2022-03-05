@@ -79,11 +79,11 @@ const ProductCard = ({ product }) => {
             View Product
           </Link>,
           <Tooltip title={tooltip}>
-            <a onClick={handleAddToCart}>
+            <a onClick={handleAddToCart} disabled={product.quantity < 1}>
               <>
                 <ShoppingCartOutlined className="text-danger" />
                 <br />
-                Add to Cart
+                {product.quantity < 1 ? "Out of Stock" : "Add to Cart"}
               </>
             </a>
           </Tooltip>,
