@@ -44,25 +44,20 @@ const NavBar = () => {
   };
   return (
     // find out if there is a div here
-    <header class="" id="myNavBar">
-      <div class="header-container navbar">
-        <a href="#hero" class="active logo">
-          <Link to="/">
-            <Image
-              className="float-start"
-              preview={false}
-              width={75}
-              src={Logo}
-            />
-          </Link>
-        </a>
-        <a href="#" class="toggle-button">
+    <header className="" id="myNavBar">
+      <div className="header-container">
+        {/* <a href="#hero" className="logo"> */}
+        <Link to="/" className="logo">
+          <img src={Logo} alt="" />
+        </Link>
+        {/* </a> */}
+        {/* <a href="#" className="toggle-button .icon">
           <i class="fa fa-bars fa-2x"></i>
-        </a>
-        <nav class="navbar-links">
-          <ul class="nav-links">
+        </a> */}
+        <nav className="navbar-links-middle">
+          <ul className="nav-links">
             <li>
-              <Link to="/store">E-Commerce Home</Link>
+              <Link to="/store">E-Commerce Page</Link>
             </li>
             <li>
               <Link to="/shop">Products Page</Link>
@@ -74,40 +69,47 @@ const NavBar = () => {
                 </Badge>
               </Link>
             </li>
+          </ul>
+        </nav>
+        <nav className="navbar-links-right">
+          <ul className="nav-links">
             <li>
               {!user && (
-                <Link key="login" className=" float-end" to="/login">
+                <Link key="login" className="float-end" to="/login">
                   Login
                 </Link>
               )}
+              {user && user.role === "lead" && (
+                <Link to="/user/history">Dashboard</Link>
+              )}
+              {user && user.role === "admin" && (
+                <Link to="/admin/dashboard">Dashboard</Link>
+              )}
             </li>
+
             <li>
               {!user && (
-                <Link key="register" className=" float-end" to="/register">
+                <Link key="register" className="float-end" to="/register">
                   Register
                 </Link>
               )}
-            </li>
-            <li>
-              {user && user.role === "lead" && (
-                <Item>
-                  <Link to="/user/history">Dashboard</Link>
-                </Item>
+
+              {user && (
+                <Link
+                  key="logout"
+                  className="float-end"
+                  onClick={logout}
+                  to="/"
+                >
+                  LogOut
+                </Link>
               )}
-              {user && user.role === "admin" && (
-                <Item>
-                  <Link to="/admin/dashboard">Dashboard</Link>
-                </Item>
-              )}
-            </li>
-            <li>
-              <h3 onClick={logout}>LogOut</h3>
             </li>
           </ul>
         </nav>
-        <a class="header-cta-button" href="#cta">
+        {/* <a class="header-cta-button" href="#cta">
           <button>Contact Us</button>
-        </a>
+        </a> */}
       </div>
     </header>
     // <Menu

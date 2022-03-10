@@ -254,7 +254,8 @@ button:hover {
   a {
     text-decoration: none;
   }
-  i {
+  i,
+  .ant-badge {
     color: var(--pri-c);
   }
   /* FIX THIS */
@@ -394,21 +395,37 @@ button:hover {
   /* Header and Nav */
   header {
     z-index: 3;
-    width: 100vw;
-    /* height: 10vh; */
-    background-color: var(--navb-c);
-    overflow: hidden;
-    position: sticky;
-    top: 0;
+    width: 100%;
+    position: fixed;
   }
-  .head-image {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    width: 6.5%;
-    /* padding: 25px 100px; */
-    padding-left: 100px;
+  .header-container {
+    /* width: 100%; */
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10%;
+    /* background: var(--navb-c); */
+    background: var(--navb-c);
+  }
+  .logo {
+    cursor: pointer;
+    width: 10%;
+  }
+
+  .navbar-links-middle {
+  }
+  .navbar-links-right {
+  }
+  .nav-links {
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  .nav-links li {
+    list-style: none;
+    display: inline-block;
+    padding: 0px 20px;
   }
   .navBar-container {
     float: right;
@@ -424,20 +441,26 @@ button:hover {
     font-size: 20px;
     font-weight: bold;
   }
-  .ant-menu {
-    background: var(--sec-t) !important;
+
+  .header-container a,
+  .header-container .ant-badge {
+    color: var(--sec-c);
+    font-size: var(--wh4);
   }
-  .ant-menu-title-content {
-    color: var(--pri-t) !important;
+
+  .header-container a:hover,
+  .header-container .ant-badge:hover {
+    color: var(--pri-c);
   }
-  .ant-menu-title-content a {
-    color: var(--pri-t) !important;
-  }
-  .ant-menu-item-icon {
-    color: var(--pri-c) !important;
-  }
-  .ant-menu-item-selected {
-    color: white !important;
+
+  .header-container a:active,
+  .header-container .ant-badge:active {
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    color: var(--sec-t);
   }
 
   .slider img,
@@ -446,19 +469,8 @@ button:hover {
     object-fit: contain;
   }
 
-  .navBar a:hover {
-    color: var(--sec-c);
-  }
-  .navBar a.active {
-    background-color: #04aa6d;
-    color: white;
-  }
-  .navBar-container .icon {
+  .header-container .icon {
     display: none;
-  }
-  .nav-logo {
-    height: 100%;
-    width: 10%;
   }
 
   /* Hero Section */

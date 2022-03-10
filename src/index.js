@@ -8,8 +8,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import rootReducer from "./reducers";
 
-import "./index.css";
 import "antd/dist/antd.css";
+import "./index.css";
+
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // import firebase from "./utils/firebase";
