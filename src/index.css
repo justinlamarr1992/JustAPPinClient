@@ -396,7 +396,8 @@ button:hover {
   header {
     z-index: 3;
     width: 100%;
-    position: fixed;
+    position: sticky;
+    top: 0;
   }
   .header-container {
     /* width: 100%; */
