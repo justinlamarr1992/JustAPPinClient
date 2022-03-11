@@ -42,19 +42,33 @@ const NavBar = () => {
     });
     navigate("/login");
   };
+
+  const handleToggleClick = () => {
+    console.log("Clciked");
+    const toggleButton = document.getElementsByClassName("toggle-button")[0];
+
+    const navBarLinksM = document.getElementsByClassName(
+      "navbar-links-middle"
+    )[0];
+    const navBarLinksR =
+      document.getElementsByClassName("navbar-links-right")[0];
+
+    toggleButton.addEventListener("click", () => {
+      navBarLinksM.classList.toggle("active");
+    });
+    toggleButton.addEventListener("click", () => {
+      navBarLinksR.classList.toggle("active");
+    });
+  };
+
   return (
     // find out if there is a div here
     <header className="" id="myNavBar">
-      <div className="header-container">
-        {/* <a href="#hero" className="logo"> */}
+      <div className="header-container navbar">
         <Link to="/" className="logo">
           <img src={Logo} alt="" />
         </Link>
-        {/* </a> */}
-        {/* <a href="#" className="toggle-button .icon">
-          <i class="fa fa-bars fa-2x"></i>
-        </a> */}
-        <nav className="navbar-links-middle">
+        <nav className="navbar-links-middle navbar-links">
           <ul className="nav-links">
             <li>
               <Link to="/store">E-Commerce Page</Link>
@@ -71,11 +85,11 @@ const NavBar = () => {
             </li>
           </ul>
         </nav>
-        <nav className="navbar-links-right">
+        <nav className="navbar-links-right navbar-links">
           <ul className="nav-links">
             <li>
               {!user && (
-                <Link key="login" className="float-end" to="/login">
+                <Link key="login" className="" to="/login">
                   Login
                 </Link>
               )}
@@ -89,18 +103,13 @@ const NavBar = () => {
 
             <li>
               {!user && (
-                <Link key="register" className="float-end" to="/register">
+                <Link key="register" className="" to="/register">
                   Register
                 </Link>
               )}
 
               {user && (
-                <Link
-                  key="logout"
-                  className="float-end"
-                  onClick={logout}
-                  to="/"
-                >
+                <Link key="logout" className="" onClick={logout} to="/">
                   LogOut
                 </Link>
               )}
@@ -110,6 +119,9 @@ const NavBar = () => {
         {/* <a class="header-cta-button" href="#cta">
           <button>Contact Us</button>
         </a> */}
+        <a href="#" onClick={handleToggleClick} className="toggle-button .icon">
+          <i class="fa fa-bars fa-2x"></i>
+        </a>
       </div>
     </header>
     // <Menu
