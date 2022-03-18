@@ -94,7 +94,9 @@ const NavBar = () => {
                 </Link>
               )}
               {user && user.role === "lead" && (
-                <Link to="/user/history">Dashboard</Link>
+                <Link to="/user/history">
+                  {user.email && user.email.split("@")[0]}
+                </Link>
               )}
               {user && user.role === "admin" && (
                 <Link to="/admin/dashboard">Dashboard</Link>
