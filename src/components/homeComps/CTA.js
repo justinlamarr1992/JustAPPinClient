@@ -18,7 +18,7 @@ const CTA = () => {
         email: email,
         phone: phone,
         // FIGURE THIS OUT
-        createdAt: new Timestamp.toDate(),
+        // createdAt: new Timestamp.toDate(),
       });
     } catch (e) {
       console.error("Error adding document: ", e);
