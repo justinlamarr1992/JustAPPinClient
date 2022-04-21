@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { auth } from "../../firebase";
+import { getAuth } from "../../firebase";
 import { toast } from "react-toastify";
 
 const Register = () => {

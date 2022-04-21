@@ -1,26 +1,12 @@
-// FIGURE THIS OUT
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-
-// import firebase from "firebase/compat/app";
-// import "firebase/compat/auth";
-// import "firebase/compat/firestore";
-// import { initializeApp, applicationDefault, cert } from "firebase-admin/app";
-// import { getFirestore, Timestamp, FieldValue } from "firebase-admin/firestore";
-// const {
-//   initializeApp,
-//   applicationDefault,
-//   cert,
-// } = require("firebase-admin/app");
-// const {
-//   getFirestore,
-//   Timestamp,
-//   FieldValue,
-// } = require("firebase-admin/firestore");
+import "firebase/compat/auth";
+import { getAuth } from "firebase/auth";
+import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+// Follow this pattern to import other Firebase services
+// import { } from 'firebase/<service>';
 
 // firebase config
-const config = {
+const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
   projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
@@ -30,17 +16,13 @@ const config = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASURMENTID,
 };
 
-// // initialize firebase app
-// if (!firebase.apps.length) {
-//   firebase.initializeApp(config);
-// }
+const app = initializeApp(firebaseConfig);
 
-const app = initializeApp(config);
-export const db = getFirestore();
+export const db = getFirestore(firebaseApp);
 
-// export
-// export const auth = firebase.auth();
-export const auth = getAuth(app);
-// export const googleAuthProvider = new app.auth.GoogleAuthProvider();
+const auth = getAuth(app);
+
+// const auth = firebase.getAuth();
 export const googleAuthProvider = new GoogleAuthProvider();
-// export const firestore = firebase.firestore();
+
+export default auth;

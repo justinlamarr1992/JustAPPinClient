@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { auth } from "./firebase";
+import { getAuth } from "./firebase";
 import { currentUser } from "./functions/auth";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

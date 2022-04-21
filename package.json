@@ -14,7 +14,7 @@
     "antd": "^4.17.2",
     "axios": "^0.24.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "firebase": "^9.6.0",
+    "firebase": "^9.6.11",
     "firebase-admin": "^10.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

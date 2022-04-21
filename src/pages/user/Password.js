@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth } from "../../firebase";
+import { getAuth } from "../../firebase";
 import { toast } from "react-toastify";
 import UserNav from "../../components/nav/UserNav";
 

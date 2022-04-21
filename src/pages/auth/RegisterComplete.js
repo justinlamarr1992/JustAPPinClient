@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { createOrUpdateUser } from "../../functions/auth";
 
-import { auth } from "../../firebase";
+import { getAuth } from "../../firebase";
 import { toast } from "react-toastify";
 
 const RegisterComplete = () => {
@@ -26,6 +26,7 @@ const RegisterComplete = () => {
       return;
     }
     try {
+      const auth = getAuth(firebaseApp);
       const result = await auth.signInWithEmailLink(
         email,
         window.location.href
